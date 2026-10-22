@@ -1,0 +1,173 @@
+/* ==========================================
+   DHISCHESS ARENA - CUSTOM STYLES
+   ========================================== */
+
+body {
+    background: radial-gradient(circle at top center, #1e293b 0%, #0f172a 100%);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    touch-action: manipulation;
+    color: #f8fafc;
+}
+
+/* Header Glow Effect */
+.hero-icon-wrapper {
+    display: inline-block;
+}
+
+.icon-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background: rgba(245, 158, 11, 0.3);
+    filter: blur(28px);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.btn-glow {
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-glow:hover {
+    box-shadow: 0 0 35px rgba(245, 158, 11, 0.65);
+    transform: translateY(-2px);
+}
+
+/* Custom Preview Board Dekoratif (Samping Kiri) */
+.landing-preview-card, .action-card {
+    background: rgba(30, 41, 59, 0.75);
+    backdrop-filter: blur(12px);
+}
+
+.preview-board-grid {
+    background-color: #0f172a;
+    border: 2px solid #334155;
+}
+
+.p-board-row {
+    display: flex;
+    justify-content: center;
+}
+
+.p-board-row .sq {
+    width: 12.5%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.p-board-row .sq.dark {
+    background-color: #334155;
+}
+
+.p-board-row .sq.light {
+    background-color: #cbd5e1;
+}
+
+.pulse-badge {
+    animation: pulseGlow 2s infinite alternate;
+}
+
+@keyframes pulseGlow {
+    from {
+        box-shadow: 0 0 5px rgba(245, 158, 11, 0.3);
+    }
+    to {
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.8);
+    }
+}
+
+/* Kartu Mode Permainan */
+.mode-card {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mode-card:hover {
+    transform: translateY(-8px);
+    border-color: #f59e0b;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+    background: rgba(30, 41, 59, 0.9);
+}
+
+.mode-icon {
+    width: 72px;
+    height: 72px;
+}
+
+/* Player Cards & Dashboard Panel */
+.player-card, .control-panel {
+    background: rgba(30, 41, 59, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.avatar {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+}
+
+/* Papan Catur & Proteksi Double-Tap Touch */
+#myBoard {
+    width: 100%;
+    max-width: 100%;
+    border: 3px solid #334155;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    touch-action: manipulation;
+}
+
+#myBoard, #myBoard * {
+    touch-action: none !important;
+}
+
+.status-box {
+    background-color: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Tombol Akses */
+.btn-danger {
+    background-color: #e11d48;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-danger:hover {
+    background-color: #be123c;
+    transform: translateY(-2px);
+}
+
+/* Responsif Mobile */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+    .player-card {
+        padding: 10px 14px !important;
+    }
+    .avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 0.95rem;
+    }
+    h1 {
+        font-size: 2.2rem;
+    }
+    .p-board-row .sq {
+        font-size: 0.85rem;
+    }
+}
