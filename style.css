@@ -150,6 +150,12 @@ body {
     transform: translateY(-2px);
 }
 
+/* Sorotan Petak untuk Bantuan AI (Hint) */
+.highlight-hint {
+    box-shadow: inset 0 0 6px 6px #f59e0b !important;
+    background-color: rgba(245, 158, 11, 0.45) !important;
+}
+
 /* Responsif Mobile */
 @media (max-width: 768px) {
     .container {

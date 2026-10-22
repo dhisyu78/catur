@@ -2,11 +2,9 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <!-- Mencegah gesture zoom otomatis di layar HP -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DhisChess Arena</title>
     
-    <!-- CSS Bootstrap 5, FontAwesome Icons, & Chessboard.js -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
@@ -16,9 +14,8 @@
 
 <div class="container py-4 min-vh-100 d-flex flex-column justify-content-center">
 
-    <!-- ================= 1. LAYAR PEMBUKA (LANDING SCREEN) ================= -->
+    <!-- 1. LAYAR PEMBUKA -->
     <div id="landingScreen" class="py-3">
-        <!-- HEADER BAGIAN ATAS: LOGO & JUDUL -->
         <div class="text-center mb-4">
             <div class="hero-icon-wrapper position-relative d-inline-block mb-2">
                 <div class="icon-glow"></div>
@@ -30,10 +27,7 @@
             <p class="text-secondary small">Platform Catur Web Modern & Interaktif</p>
         </div>
 
-        <!-- BARIS UTAMA: KIRI (ANIMASI CATUR) & KANAN (PANEL DESKRIPSI) -->
         <div class="row align-items-center g-4 justify-content-center">
-            
-            <!-- SAMPING KIRI: DEKORASI PAPAN CATUR -->
             <div class="col-lg-6 col-md-10 text-center">
                 <div class="landing-preview-card p-3 rounded-4 shadow-lg border border-secondary-subtle">
                     <div class="preview-board-grid rounded-3 overflow-hidden shadow">
@@ -86,7 +80,6 @@
                 </div>
             </div>
 
-            <!-- SAMPING KANAN: PANEL DENGAN TOMBOL MAIN SEKARANG -->
             <div class="col-lg-6 col-md-10">
                 <div class="action-card p-4 rounded-4 shadow-lg border border-secondary-subtle h-100 d-flex flex-column justify-content-between">
                     <div>
@@ -99,7 +92,6 @@
                         </p>
                     </div>
 
-                    <!-- Tombol Utama -->
                     <div class="pt-2">
                         <button id="startMainBtn" class="btn btn-warning btn-lg fw-bold w-100 py-3 shadow-lg rounded-pill btn-glow">
                             <i class="fa-solid fa-play me-2"></i>MAIN SEKARANG
@@ -107,11 +99,10 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <!-- ================= 2. LAYAR PILIH MODE ================= -->
+    <!-- 2. LAYAR PILIH MODE -->
     <div id="modeScreen" class="d-none">
         <div class="text-center mb-5">
             <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-3 py-2 mb-2 fw-semibold">
@@ -122,7 +113,6 @@
         </div>
 
         <div class="row g-4 justify-content-center">
-            <!-- Mode 1: Bot AI -->
             <div class="col-lg-4 col-md-6">
                 <div class="mode-card p-4 rounded-4 text-center h-100 d-flex flex-column justify-content-between" onclick="selectMode('bot')">
                     <div>
@@ -136,7 +126,6 @@
                 </div>
             </div>
 
-            <!-- Mode 2: Teman (Local) -->
             <div class="col-lg-4 col-md-6">
                 <div class="mode-card p-4 rounded-4 text-center h-100 d-flex flex-column justify-content-between" onclick="selectMode('friend')">
                     <div>
@@ -150,7 +139,6 @@
                 </div>
             </div>
 
-            <!-- Mode 3: Online Matchmaking -->
             <div class="col-lg-4 col-md-6">
                 <div class="mode-card p-4 rounded-4 text-center h-100 d-flex flex-column justify-content-between opacity-75" onclick="selectMode('online')">
                     <div>
@@ -172,7 +160,7 @@
         </div>
     </div>
 
-    <!-- ================= 3. LAYAR PAPAN PERMAINAN ================= -->
+    <!-- 3. LAYAR PAPAN PERMAINAN -->
     <div id="gameScreen" class="d-none">
         <header class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom border-secondary-subtle">
             <button id="backToModeBtn" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
@@ -183,9 +171,7 @@
         </header>
 
         <div class="row g-4 justify-content-center align-items-start">
-            <!-- Kolom Kiri: Papan & Profil Pemain -->
             <div class="col-lg-6 col-md-8">
-                <!-- Kartu Lawan (Atas) -->
                 <div class="player-card mb-2 d-flex align-items-center justify-content-between p-3 rounded-4 shadow-sm">
                     <div class="d-flex align-items-center gap-3">
                         <div id="opponentAvatar" class="avatar bg-danger text-white rounded-circle d-flex align-items-center justify-content-center">
@@ -198,10 +184,8 @@
                     </div>
                 </div>
 
-                <!-- Papan Catur -->
                 <div id="myBoard" class="shadow-lg rounded-4 mb-2"></div>
 
-                <!-- Kartu Anda (Bawah) -->
                 <div class="player-card d-flex align-items-center justify-content-between p-3 rounded-4 shadow-sm">
                     <div class="d-flex align-items-center gap-3">
                         <div class="avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">
@@ -215,7 +199,7 @@
                 </div>
             </div>
 
-            <!-- Kolom Kanan: Status & Kontrol -->
+            <!-- STATUS & KONTROL DENGAN DESAIN TOMBOL BARU -->
             <div class="col-lg-4 col-md-8">
                 <div class="control-panel p-4 rounded-4 text-white h-100 shadow-sm">
                     <h5 class="fw-bold mb-3 border-bottom border-secondary pb-2">
@@ -228,9 +212,24 @@
                     </div>
 
                     <div class="d-grid gap-2 mb-4">
-                        <button id="resetBtn" class="btn btn-danger btn-lg fw-bold rounded-pill shadow-sm">
-                            <i class="fa-solid fa-rotate-left me-2"></i>Reset Permainan
+                        <!-- Tombol Bantuan Utama -->
+                        <button id="hintBtn" class="btn btn-warning btn-lg fw-bold rounded-pill shadow-sm mb-1">
+                            <i class="fa-solid fa-lightbulb me-2"></i>Bantuan AI (Hint)
                         </button>
+                        
+                        <!-- Tombol Undo & Reset Berdampingan -->
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <button id="undoBtn" class="btn btn-outline-info w-100 fw-bold rounded-pill py-2 shadow-sm">
+                                    <i class="fa-solid fa-reply me-1"></i> Undo
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button id="resetBtn" class="btn btn-outline-danger w-100 fw-bold rounded-pill py-2 shadow-sm">
+                                    <i class="fa-solid fa-arrows-rotate me-1"></i> Reset
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="pwa-info p-3 rounded-3 bg-dark-subtle border border-secondary-subtle text-secondary small">
@@ -243,7 +242,7 @@
 
 </div>
 
-<!-- Modal Pilih Tingkat Kesulitan Bot -->
+<!-- Modal Pilih Bot -->
 <div class="modal fade" id="botDifficultyModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-dark text-white border-secondary p-4 rounded-4 shadow-lg text-center">
@@ -295,7 +294,6 @@
     </div>
 </div>
 
-<!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
