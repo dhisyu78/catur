@@ -120,7 +120,7 @@
                             <i class="fa-solid fa-robot fs-2"></i>
                         </div>
                         <h5 class="fw-bold text-white mb-2">Tantang Bot AI</h5>
-                        <p class="text-secondary small mb-4">Uji kemampuan taktikmu melawan Bot AI (Mudah, Sedang, Sulit).</p>
+                        <p class="text-secondary small mb-4">Uji kemampuan taktikmu melawan Bot AI (Pemula, Sedang, Raja Terakhir).</p>
                     </div>
                     <button class="btn btn-outline-danger fw-bold w-100 rounded-pill">Main vs Bot</button>
                 </div>
@@ -162,62 +162,100 @@
 
     <!-- 3. LAYAR PAPAN PERMAINAN -->
     <div id="gameScreen" class="d-none">
-        <header class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom border-secondary-subtle">
+        <header class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-secondary-subtle">
             <button id="backToModeBtn" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
                 <i class="fa-solid fa-arrow-left me-1"></i> Ganti Mode
             </button>
             <h5 class="fw-bold text-light mb-0 d-none d-md-block">Dhis<span class="text-warning">Chess</span> Arena</h5>
-            <span id="modeBadge" class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold">Mode: Bot AI</span>
+            
+            <div class="d-flex align-items-center gap-2">
+                <button id="muteBtn" class="btn btn-outline-warning btn-sm rounded-circle shadow-sm" title="Matikan/Aktifkan Suara" style="width: 36px; height: 36px;">
+                    <i class="fa-solid fa-volume-high"></i>
+                </button>
+                <span id="modeBadge" class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold">Mode: Bot AI</span>
+            </div>
         </header>
 
         <div class="row g-4 justify-content-center align-items-start">
             <div class="col-lg-6 col-md-8">
-                <div class="player-card mb-2 d-flex align-items-center justify-content-between p-3 rounded-4 shadow-sm">
-                    <div class="d-flex align-items-center gap-3">
-                        <div id="opponentAvatar" class="avatar bg-danger text-white rounded-circle d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-robot"></i>
+                <!-- KARTU LAWAN (ATAS) -->
+                <div class="player-card mb-2 p-3 rounded-4 shadow-sm border border-secondary-subtle">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <div id="opponentAvatar" class="avatar bg-danger text-white rounded-circle d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <div>
+                                <h6 id="opponentName" class="mb-0 text-white fw-bold">Yudhis Raja Terakhir</h6>
+                                <span id="opponentBadge" class="badge bg-danger">Raja Terakhir</span>
+                            </div>
                         </div>
-                        <div>
-                            <h6 id="opponentName" class="mb-0 text-white fw-bold">Yudhis Bot</h6>
-                            <span id="opponentBadge" class="badge bg-danger">Level Sulit</span>
+                        <div id="opponentClock" class="chess-clock rounded-3 px-3 py-1 text-center">
+                            <i class="fa-solid fa-stopwatch opacity-50 me-1 small"></i><span class="clock-time">--:--</span>
                         </div>
                     </div>
+                    <div id="opponentCaptured" class="captured-box mt-2 pt-2 border-top border-secondary-subtle d-flex align-items-center gap-1 flex-wrap"></div>
                 </div>
 
+                <!-- PITA STRATEGI PEMBUKAAN -->
+                <div class="opening-banner text-center py-2 px-3 rounded-3 mb-2 shadow-sm border border-secondary-subtle bg-dark-subtle d-flex align-items-center justify-content-center gap-2">
+                    <i class="fa-solid fa-book-open text-warning"></i>
+                    <span class="text-secondary small">Strategi:</span>
+                    <strong id="openingName" class="text-warning">Awal Pertandingan</strong>
+                </div>
+
+                <!-- PAPAN CATUR -->
                 <div id="myBoard" class="shadow-lg rounded-4 mb-2"></div>
 
-                <div class="player-card d-flex align-items-center justify-content-between p-3 rounded-4 shadow-sm">
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-user"></i>
+                <!-- KARTU PEMAIN (BAWAH) -->
+                <div class="player-card p-3 rounded-4 shadow-sm border border-secondary-subtle">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0 text-white fw-bold">Pemain 1 (Anda)</h6>
+                                <span class="badge bg-success">Bidak Putih</span>
+                            </div>
                         </div>
-                        <div>
-                            <h6 class="mb-0 text-white fw-bold">Pemain 1 (Anda)</h6>
-                            <span class="badge bg-success">Bidak Putih</span>
+                        <div id="playerClock" class="chess-clock rounded-3 px-3 py-1 text-center">
+                            <i class="fa-solid fa-stopwatch opacity-50 me-1 small"></i><span class="clock-time">--:--</span>
                         </div>
                     </div>
+                    <div id="playerCaptured" class="captured-box mt-2 pt-2 border-top border-secondary-subtle d-flex align-items-center gap-1 flex-wrap"></div>
                 </div>
             </div>
 
-            <!-- STATUS & KONTROL DENGAN DESAIN TOMBOL BARU -->
             <div class="col-lg-4 col-md-8">
-                <div class="control-panel p-4 rounded-4 text-white h-100 shadow-sm">
+                <div class="control-panel p-4 rounded-4 text-white h-100 shadow-sm border border-secondary-subtle">
                     <h5 class="fw-bold mb-3 border-bottom border-secondary pb-2">
                         <i class="fa-solid fa-sliders me-2 text-warning"></i>Status & Kontrol
                     </h5>
                     
-                    <div class="status-box p-3 rounded-3 mb-4 text-center">
+                    <div class="status-box p-3 rounded-3 mb-3 text-center">
                         <span class="text-secondary small d-block mb-1">Status Permainan</span>
                         <h6 id="statusText" class="fw-bold text-warning mb-0">Giliran Putih</h6>
                     </div>
 
+                    <!-- Box Riwayat Langkah (Move Log) -->
+                    <div class="move-log-box p-3 rounded-3 mb-3 border border-secondary-subtle">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-secondary small fw-bold">
+                                <i class="fa-solid fa-list-ol me-1 text-warning"></i>Riwayat Langkah
+                            </span>
+                            <span id="moveCountBadge" class="badge bg-secondary">0 Langkah</span>
+                        </div>
+                        <div id="moveLog" class="move-log-content">
+                            <div class="text-secondary text-center small py-2">Belum ada langkah</div>
+                        </div>
+                    </div>
+
                     <div class="d-grid gap-2 mb-4">
-                        <!-- Tombol Bantuan Utama -->
                         <button id="hintBtn" class="btn btn-warning btn-lg fw-bold rounded-pill shadow-sm mb-1">
                             <i class="fa-solid fa-lightbulb me-2"></i>Bantuan AI (Hint)
                         </button>
                         
-                        <!-- Tombol Undo & Reset Berdampingan -->
                         <div class="row g-2">
                             <div class="col-6">
                                 <button id="undoBtn" class="btn btn-outline-info w-100 fw-bold rounded-pill py-2 shadow-sm">
@@ -242,36 +280,64 @@
 
 </div>
 
-<!-- Modal Pilih Bot -->
-<div class="modal fade" id="botDifficultyModal" tabindex="-1" aria-hidden="true">
+<!-- Modal Pilih Pengaturan Pertandingan (Bot & Friend) -->
+<div class="modal fade" id="gameSetupModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-dark text-white border-secondary p-4 rounded-4 shadow-lg text-center">
-            <h4 class="fw-bold mb-2"><i class="fa-solid fa-robot text-warning me-2"></i>Pilih Lawan Bot</h4>
-            <p class="text-secondary small mb-4">Tentukan tingkat kesulitan AI yang ingin kamu lawan:</p>
+            <h4 id="modalSetupTitle" class="fw-bold mb-2"><i class="fa-solid fa-sliders text-warning me-2"></i>Pengaturan Pertandingan</h4>
+            <p id="modalSetupSub" class="text-secondary small mb-3">Tentukan durasi jam catur dan mode permainan:</p>
 
-            <div class="d-grid gap-3">
+            <!-- Pengaturan Jam Catur Gelap -->
+            <div class="timer-select-box mb-4 text-start p-3 rounded-3 border border-secondary-subtle">
+                <label class="form-label text-warning small fw-bold mb-2">
+                    <i class="fa-solid fa-stopwatch me-1"></i>Pilih Jam Catur (Timer):
+                </label>
+                <div class="btn-group w-100" role="group" id="timeControlGroup">
+                    <input type="radio" class="btn-check" name="timeOption" id="timeOff" value="0" checked>
+                    <label class="btn btn-outline-warning btn-sm fw-semibold" for="timeOff">Tanpa Waktu</label>
+
+                    <input type="radio" class="btn-check" name="timeOption" id="time3m" value="180">
+                    <label class="btn btn-outline-warning btn-sm fw-semibold" for="time3m">3 Menit</label>
+
+                    <input type="radio" class="btn-check" name="timeOption" id="time5m" value="300">
+                    <label class="btn btn-outline-warning btn-sm fw-semibold" for="time5m">5 Menit</label>
+
+                    <input type="radio" class="btn-check" name="timeOption" id="time10m" value="600">
+                    <label class="btn btn-outline-warning btn-sm fw-semibold" for="time10m">10 Menit</label>
+                </div>
+            </div>
+
+            <!-- Pilihan Kesulitan Bot AI -->
+            <div id="botSelectionContainer" class="d-grid gap-3">
                 <button class="btn btn-outline-info btn-lg fw-bold rounded-pill text-start p-3 d-flex align-items-center justify-content-between" onclick="confirmBotSelection('nadya')">
                     <div>
-                        <h6 class="mb-0 fw-bold text-white">Nadya Bot</h6>
+                        <h6 class="mb-0 fw-bold text-white">Bot Pemula</h6>
                         <small class="text-info">Tingkat Pemula</small>
                     </div>
-                    <span class="badge bg-info text-dark">Level Mudah</span>
+                    <span class="badge bg-info text-dark">Pemula</span>
                 </button>
 
                 <button class="btn btn-outline-warning btn-lg fw-bold rounded-pill text-start p-3 d-flex align-items-center justify-content-between" onclick="confirmBotSelection('faiza')">
                     <div>
-                        <h6 class="mb-0 fw-bold text-white">Faiza Bot</h6>
+                        <h6 class="mb-0 fw-bold text-white">Bot Sedang</h6>
                         <small class="text-warning">Tingkat Menengah</small>
                     </div>
-                    <span class="badge bg-warning text-dark">Level Sedang</span>
+                    <span class="badge bg-warning text-dark">Sedang</span>
                 </button>
 
                 <button class="btn btn-outline-danger btn-lg fw-bold rounded-pill text-start p-3 d-flex align-items-center justify-content-between" onclick="confirmBotSelection('yudhis')">
                     <div>
-                        <h6 class="mb-0 fw-bold text-white">Yudhis Bot</h6>
+                        <h6 class="mb-0 fw-bold text-white">Yudhis Raja Terakhir</h6>
                         <small class="text-danger">Tingkat Ahli</small>
                     </div>
-                    <span class="badge bg-danger">Level Sulit</span>
+                    <span class="badge bg-danger">Raja Terakhir</span>
+                </button>
+            </div>
+
+            <!-- Tombol Mulai untuk Mode Teman -->
+            <div id="friendStartContainer" class="d-none pt-2">
+                <button class="btn btn-primary btn-lg fw-bold w-100 rounded-pill py-3 shadow-lg" onclick="confirmFriendSelection()">
+                    <i class="fa-solid fa-play me-2"></i>Mulai Bermain 1v1
                 </button>
             </div>
         </div>
